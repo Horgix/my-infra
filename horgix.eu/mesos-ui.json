@@ -15,7 +15,6 @@
         {
           "containerPort":  5000,
           "hostPort":       0,
-          "servicePort":    10008,
           "protocol":       "tcp",
           "name":           "web",
           "labels":         {}
@@ -51,12 +50,5 @@
     "traefik.backend":  "mesosui",
     "traefik.portIndex": "0",
     "traefik.frontend.rule": "Host:cluster.horgix.eu"
-  },
-  "portDefinitions": [
-    {
-      "port":     10008,
-      "protocol": "tcp",
-      "labels":   {}
-    }
-  ]
+  }
 }
