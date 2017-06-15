@@ -1,0 +1,62 @@
+{
+  "id":   "/mesos-ui",
+  "cmd":  null,
+  "cpus": 0.2,
+  "mem":  256,
+  "disk": 0,
+  "instances":  1,
+  "container": {
+    "type":     "DOCKER",
+    "volumes":  [],
+    "docker": {
+      "image":    "capgemini/mesos-ui:standalone-latest",
+      "network":  "BRIDGE",
+      "portMappings": [
+        {
+          "containerPort":  5000,
+          "hostPort":       0,
+          "servicePort":    10008,
+          "protocol":       "tcp",
+          "name":           "web",
+          "labels":         {}
+        }
+      ],
+      "privileged": false,
+      "parameters": [
+        {
+          "key": "link",
+          "value": "zookeeper:zookeeper"
+        }
+      ],
+      "forcePullImage": false
+    }
+  },
+  "env": {
+    "ZOOKEEPER_ADDRESS": "zookeeper:2181"
+  },
+  "healthChecks": [
+    {
+      "path": "/",
+      "protocol": "HTTP",
+      "portIndex": 0,
+      "gracePeriodSeconds": 300,
+      "intervalSeconds":    60,
+      "timeoutSeconds":     20,
+      "maxConsecutiveFailures": 3,
+      "ignoreHttp1xx":      false
+    }
+  ],
+  "labels": {
+    "traefik.enable":   "true",
+    "traefik.backend":  "mesosui",
+    "traefik.portIndex": "0",
+    "traefik.frontend.rule": "Host:cluster.horgix.eu"
+  },
+  "portDefinitions": [
+    {
+      "port":     10008,
+      "protocol": "tcp",
+      "labels":   {}
+    }
+  ]
+}
