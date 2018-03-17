@@ -23,8 +23,8 @@
       "privileged": false,
       "parameters": [
         {
-          "key": "link",
-          "value": "zookeeper:zookeeper"
+          "key":    "link",
+          "value":  "zookeeper:zookeeper"
         }
       ],
       "forcePullImage": false
