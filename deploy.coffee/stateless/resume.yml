@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  clickcount:
+  resume:
     image: horgix/resume:latest
     networks:
       - traefik-network
