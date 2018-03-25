@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  wiki:
+    image: marcelhuberfoo/docker-gitit:latest
+    volumes:
+      - /srv/docker_volumes/wiki:/data
+    networks:
+      - traefik-network
+    environment:
+      GIT_COMMITTER_EMAIL:  "alexis.horgix.chotard@gmail.com"
+      GIT_AUTHOR_NAME:      "Gitit Horgix"
+      GIT_AUTHOR_EMAIL:     "alexis.horgix.chotard@gmail.com"
+    labels:
+      traefik.enable:         "true"
+      traefik.port:           "5001"
+      traefik.backend:        "wiki"
+      traefik.frontend.rule:  "Host:wiki.test.deploy.coffee"
+
+networks:
+  traefik-network:
+    external: True
