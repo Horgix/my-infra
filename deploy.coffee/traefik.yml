@@ -1,0 +1,25 @@
+# We need at least 3.5 to specify a pretty network name
+version: '3.5'
+
+services:
+  traefik:
+    image:  traefik:1.5.4-alpine
+    networks:
+      - traefik-network
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8081:8081"
+    volumes:
+      - /srv/docker_volumes/traefik/traefik-docker-engine-only.toml:/etc/traefik/traefik.toml
+      - /srv/docker_volumes/traefik/acme.json:/acme.json
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      traefik.enable: "true"
+      traefik.port: "8080"
+      traefik.backend: "traefik"
+      traefik.frontend.rule: "Host:traefik.test.deploy.coffee"
+
+networks:
+  traefik-network:
+    name: traefik-network
