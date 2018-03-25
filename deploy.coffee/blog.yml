@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  blog:
+    image: horgix/blog:latest
+    networks:
+      - traefik-network
+    labels:
+      traefik.enable:       "true"
+      traefik.port:         "80"
+      traefik.backend:      "blog"
+      traefik.frontend.rule: "Host:blog.test.deploy.coffee"
+
+networks:
+  traefik-network:
+    external: True
