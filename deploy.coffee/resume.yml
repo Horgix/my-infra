@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  clickcount:
+    image: horgix/resume:latest
+    networks:
+      - traefik-network
+    labels:
+      traefik.enable:         "true"
+      traefik.port:           "80"
+      traefik.backend:        "resume"
+      traefik.frontend.rule:  "Host:resume.test.deploy.coffee"
+      # Will be cv. resume. and bare domain name later on
+
+networks:
+  traefik-network:
+    external: True
