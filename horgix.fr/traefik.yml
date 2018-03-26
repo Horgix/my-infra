@@ -18,7 +18,7 @@ services:
       traefik.enable: "true"
       traefik.port: "8080"
       traefik.backend: "traefik"
-      traefik.frontend.rule: "Host:traefik.test.deploy.coffee"
+      traefik.frontend.rule: "Host:traefik.horgix.fr"
 
 networks:
   traefik-network:
