@@ -9,7 +9,7 @@ services:
     ports:
       - "80:80"
       - "443:443"
-      - "8081:8081"
+      - "8080:8080"
     volumes:
       - /srv/docker_volumes/traefik/traefik-docker-engine-only.toml:/etc/traefik/traefik.toml
       - /srv/docker_volumes/traefik/acme.json:/acme.json
