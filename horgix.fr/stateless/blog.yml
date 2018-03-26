@@ -9,7 +9,7 @@ services:
       traefik.enable:       "true"
       traefik.port:         "80"
       traefik.backend:      "blog"
-      traefik.frontend.rule: "Host:blog.test.deploy.coffee"
+      traefik.frontend.rule: "Host:blog.horgix.fr"
 
 networks:
   traefik-network:

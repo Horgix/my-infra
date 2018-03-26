@@ -9,7 +9,7 @@ services:
       traefik.enable:         "true"
       traefik.port:           "80"
       traefik.backend:        "clickcount"
-      traefik.frontend.rule:  "Host:clickcount.test.deploy.coffee"
+      traefik.frontend.rule:  "Host:clickcount.horgix.fr"
 
 networks:
   traefik-network:

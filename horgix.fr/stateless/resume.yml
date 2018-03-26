@@ -9,8 +9,7 @@ services:
       traefik.enable:         "true"
       traefik.port:           "80"
       traefik.backend:        "resume"
-      traefik.frontend.rule:  "Host:resume.test.deploy.coffee"
-      # Will be cv. resume. and bare domain name later on
+      traefik.frontend.rule:  "Host:resume.horgix.fr,cv.horgix.fr,horgix.fr"
 
 networks:
   traefik-network:
