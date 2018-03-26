@@ -1,5 +1,4 @@
-# We need at least 3.5 to specify a pretty network name
-version: '3.5'
+version: '3'
 
 services:
   rocketchat:
