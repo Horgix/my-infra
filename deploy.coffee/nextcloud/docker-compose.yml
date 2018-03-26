@@ -1,0 +1,63 @@
+version: '3'
+
+services:
+  nextcloud:
+    image: wonderfall/nextcloud:12
+    links:
+      - mariadb:nextcloud-db
+    networks:
+      - default
+      - traefik-network
+    volumes:
+      - /srv/docker_volumes/nextcloud/data:/data
+      - /srv/docker_volumes/nextcloud/config:/config
+      - /srv/docker_volumes/nextcloud/apps:/apps2
+    environment:
+      UPLOAD_MAX_SIZE:  "10G"
+      APC_SHM_SIZE:     "256"
+      OPCACHE_MEM_SIZE: "256"
+      REDIS_MAX_MEMORY: "128mb"
+      CRON_PERIOD:      "15m"
+      TZ:               "Europe/Paris"
+      DB_TYPE:          "mysql"
+      DB_NAME:          "nextcloud"
+      DB_HOST:          "nextcloud-db"
+    env_file:
+      - /srv/docker_secrets/nextcloud/nextcloud.env
+      # Contains:
+      # - ADMIN_USER
+      # - ADMIN_PASSWORD
+      # - DB_USER
+      # - DB_PASSWORD
+    labels:
+      traefik.docker.network: "traefik-network"
+      traefik.enable:         "true"
+      traefik.port:           "8888"
+      traefik.backend:        "nextcloud"
+      traefik.frontend.rule:  "Host:nextcloud.test.deploy.coffee"
+
+  mariadb:
+    image: mariadb:10.1.19
+    volumes:
+      - /srv/docker_volumes/nextcloud/database:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: "nextcloud"
+    env_file:
+      - /srv/docker_secrets/nextcloud/mariadb.env
+      # Contains:
+      # - MYSQL_ROOT_PASSWORD
+      # - MYSQL_USER
+      # - MYSQL_PASSWORD
+    networks:
+      - default
+
+  cache:
+    image: redis:3.2.9-alpine
+    volumes:
+      - /srv/docker_volumes/nextcloud/cache:/data
+    networks:
+      - default
+
+networks:
+  traefik-network:
+    external: True
