@@ -10,7 +10,7 @@ services:
       - /srv/docker_volumes/rocketchat/uploads:/app/uploads
     environment:
       PORT:             "3000"
-      ROOT_URL:         "https://rocket.test.deploy.coffee"
+      ROOT_URL:         "https://rocket.horgix.fr"
       MONGO_URL:        "mongodb://mongo:27017/rocketchat"
       MONGO_OPLOG_URL:  "mongodb://mongo:27017/local"
     links:
@@ -20,7 +20,7 @@ services:
       traefik.enable:         "true"
       traefik.port:           "3000"
       traefik.backend:        "rocketchat"
-      traefik.frontend.rule:  "Host:rocket.test.deploy.coffee"
+      traefik.frontend.rule:  "Host:rocket.horgix.fr"
 
   mongo:
     image: mongo:3.6.3
