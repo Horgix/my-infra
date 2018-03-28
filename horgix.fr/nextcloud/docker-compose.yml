@@ -38,7 +38,7 @@ services:
       traefik.frontend.rule:  "Host:nextcloud.horgix.fr"
 
   mariadb:
-    image: mariadb:10.1.19
+    image: mariadb:10.2.13
     volumes:
       - /srv/docker_volumes/nextcloud/database:/var/lib/mysql
     environment:
