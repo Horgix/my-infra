@@ -2,7 +2,7 @@ version: '3'
 
 services:
   nextcloud:
-    image: wonderfall/nextcloud:12
+    image: wonderfall/nextcloud:13
     links:
       - mariadb:nextcloud-db
       - redis:nextcloud-cache
