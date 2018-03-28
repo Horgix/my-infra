@@ -15,8 +15,8 @@ services:
       - /srv/docker_volumes/nextcloud/apps:/apps2
     environment:
       UPLOAD_MAX_SIZE:  "10G"
-      APC_SHM_SIZE:     "256"
-      OPCACHE_MEM_SIZE: "256"
+      APC_SHM_SIZE:     "256M"
+      OPCACHE_MEM_SIZE: "256M"
       REDIS_MAX_MEMORY: "128mb"
       CRON_PERIOD:      "15m"
       TZ:               "Europe/Paris"
