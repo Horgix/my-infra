@@ -35,7 +35,7 @@ services:
       traefik.enable:         "true"
       traefik.port:           "8888"
       traefik.backend:        "nextcloud"
-      traefik.frontend.rule:  "Host:nextcloud.test.deploy.coffee"
+      traefik.frontend.rule:  "Host:nextcloud.horgix.fr"
 
   mariadb:
     image: mariadb:10.1.19
