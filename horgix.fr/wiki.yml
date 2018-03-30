@@ -15,7 +15,7 @@ services:
       traefik.enable:         "true"
       traefik.port:           "5001"
       traefik.backend:        "wiki"
-      traefik.frontend.rule:  "Host:wiki.test.deploy.coffee"
+      traefik.frontend.rule:  "Host:wiki.horgix.fr"
 
 networks:
   traefik-network:
