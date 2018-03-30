@@ -4,7 +4,7 @@ services:
   nextcloud:
     image: wonderfall/nextcloud:13
     links:
-      - mariadb:nextcloud-db
+      - postgres:postgres
       - redis:nextcloud-cache
     networks:
       - default
@@ -20,9 +20,9 @@ services:
       REDIS_MAX_MEMORY: "128mb"
       CRON_PERIOD:      "15m"
       TZ:               "Europe/Paris"
-      DB_TYPE:          "mysql"
+      DB_TYPE:          "pgsql"
       DB_NAME:          "nextcloud"
-      DB_HOST:          "nextcloud-db"
+      DB_HOST:          "postgres"
     env_file:
       - /srv/docker_secrets/nextcloud/nextcloud.env
       # Contains:
@@ -37,20 +37,19 @@ services:
       traefik.backend:        "nextcloud"
       traefik.frontend.rule:  "Host:nextcloud.horgix.fr"
 
-  mariadb:
-    image: mariadb:10.2.13
+  postgres:
+    image: postgres:10.3-alpine
     volumes:
-      - /srv/docker_volumes/nextcloud/database:/var/lib/mysql
+      - /srv/docker_volumes/nextcloud/postgresql:/var/lib/postgresql/data
     environment:
-      MYSQL_DATABASE: "nextcloud"
+      POSTGRES_DB: "nextcloud"
+    # TODO : use secrets instead of this, the official Postgres image supports
+    # reading user/password/db from files.
     env_file:
-      - /srv/docker_secrets/nextcloud/mariadb.env
+      - /srv/docker_secrets/nextcloud/postgres.env
       # Contains:
-      # - MYSQL_ROOT_PASSWORD
-      # - MYSQL_USER
-      # - MYSQL_PASSWORD
-    networks:
-      - default
+      # - POSTGRES_USER
+      # - POSTGRES_PASSWORD
 
   redis:
     image: redis:3.2.9-alpine
